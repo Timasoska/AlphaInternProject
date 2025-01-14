@@ -11,8 +11,13 @@ composeBom = "2024.12.01"
 coilCompose = "2.7.0"
 hiltAndroidCompiler = "2.55"
 roomKtx = "2.6.1"
+converterGson = "2.11.0"
+retrofit = "2.11.0"
 
 [libraries]
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidCompiler" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
