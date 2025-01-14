@@ -1,17 +1,16 @@
 package com.example.alphainternproject.domain.usecase
 
-import com.example.alphainternproject.data.local.BinEntity
 import com.example.alphainternproject.domain.model.BinModel
 import com.example.alphainternproject.domain.repository.BinRepository
-import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 import javax.inject.Inject
 
-class InsertBinUseCase @Inject constructor(
+class getBinInfoUseCase @Inject constructor(
     private val repository: BinRepository
 ){
 
-    suspend operator fun invoke(binModel: BinModel){
-        repository.insertBin(binModel)
+    suspend operator fun invoke(bin: String) : Response<BinModel> {
+        return repository.getBinInfo(bin)
     }
 
 }

@@ -10,6 +10,7 @@ import java.lang.Thread.State
 data class BinState(
     val isLoading: Boolean = false,
     val error: String? = null,
-    val binHistory: List<BinModel> = emptyList()
+    val binHistory: List<BinModel> = emptyList(),
+    val binInfo: BinModel? = null
 
 )
