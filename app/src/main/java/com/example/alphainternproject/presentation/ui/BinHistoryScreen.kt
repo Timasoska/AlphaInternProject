@@ -46,7 +46,7 @@ fun BinHistoryScreen(viewModel: BinViewModel) {
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
                     Column(modifier = Modifier.padding(8.dp)) {
-                        Text("BIN Length: ${bin.number.length ?: "N/A"}")
+                        Text("Нумерация: ${bin.country.numeric ?: "N/A"}")
                         Text("Страна: ${bin.country.name ?: "N/A"}")
                         Text("Тип карты: ${bin.scheme ?: "N/A"}")
                     }
