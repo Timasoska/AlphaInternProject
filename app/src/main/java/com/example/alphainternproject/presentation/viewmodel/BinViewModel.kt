@@ -3,6 +3,10 @@ package com.example.alphainternproject.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.alphainternproject.domain.model.Bank
+import com.example.alphainternproject.domain.model.BinModel
+import com.example.alphainternproject.domain.model.Country
+import com.example.alphainternproject.domain.model.Number
 import com.example.alphainternproject.domain.usecase.GetAllBinUseCase
 import com.example.alphainternproject.domain.usecase.getBinInfoUseCase
 import com.example.alphainternproject.domain.usecase.InsertBinUseCase
@@ -44,41 +48,39 @@ class BinViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: BinEvent){
-        when(event){
+    fun onEvent(event: BinEvent) {
+        when (event) {
             is BinEvent.GetBin -> {
                 viewModelScope.launch {
-                    _state.value = _state.value.copy(isLoading = true)
-                    Log.d("BinViewModel", "Loading started")
-                    try{
+                    _state.value = _state.value.copy(isLoading = true, binInfo = null, error = null)
+                    try {
                         val response = getBinInfoUseCase(event.binNumber)
-                        Log.d("BinViewModel", "Response received: $response")
-                        if (response.isSuccessful){
+                        if (response.isSuccessful) {
                             val binInfo = response.body()
-                            _state.value = _state.value.copy(
-                                isLoading = false,
-                                binInfo = binInfo,
-                                error = null
-                            )
-                            Log.d("BinViewModel", "Полученная информация о BIN: $binInfo")
                             binInfo?.let {
-                                Log.d("BinViewModel", "Сохранение BIN в историю")
-                                insertBinUseCase(it)
-                                loadHistory()
+                                _state.value = _state.value.copy(
+                                    isLoading = false,
+                                    binInfo = it,
+                                    error = null
+                                )
+                                insertBinUseCase(it) // Сохранение в историю
+                            } ?: run {
+                                _state.value = _state.value.copy(
+                                    isLoading = false,
+                                    error = "Полученные данные пусты"
+                                )
                             }
                         } else {
                             _state.value = _state.value.copy(
                                 isLoading = false,
-                                error = "Ошибка получения данных: ${response.message()}"
+                                error = "Ошибка: ${response.message()}"
                             )
-                            Log.d("BinViewModel", "Ошибка получения данных: ${response.message()}")
                         }
                     } catch (e: Exception) {
                         _state.value = _state.value.copy(
                             isLoading = false,
                             error = "Ошибка получения данных: ${e.message}"
                         )
-                        Log.e("BinViewModel", "Ошибка получения данных", e)
                     }
                 }
             }
@@ -88,5 +90,6 @@ class BinViewModel @Inject constructor(
             }
         }
     }
+
 }
 
