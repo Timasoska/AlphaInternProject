@@ -17,7 +17,7 @@ fun BinModel.toEntity(): BinEntity {
         countryLongitude = country.longitude ?: 0,
         countryName = country.name ?: "",
         countryNumeric = country.numeric ?: "",
-        numberLength = number?.length ?: 0, // Здесь важно передать корректное значение
+        numberLength = number?.length ?: 0,
         numberLuhn = number?.luhn ?: false,
         prepaid = prepaid,
         scheme = scheme ?: "",

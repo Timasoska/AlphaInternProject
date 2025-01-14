@@ -1,7 +1,6 @@
 package com.example.alphainternproject.data.local
 
 
-import android.util.Log
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

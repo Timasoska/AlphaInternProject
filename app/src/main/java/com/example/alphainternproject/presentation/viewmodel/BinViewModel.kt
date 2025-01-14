@@ -3,14 +3,9 @@ package com.example.alphainternproject.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.alphainternproject.domain.model.Bank
-import com.example.alphainternproject.domain.model.BinModel
-import com.example.alphainternproject.domain.model.Country
-import com.example.alphainternproject.domain.model.Number
 import com.example.alphainternproject.domain.usecase.GetAllBinUseCase
 import com.example.alphainternproject.domain.usecase.getBinInfoUseCase
 import com.example.alphainternproject.domain.usecase.InsertBinUseCase
-import com.example.alphainternproject.mappers.toEntity
 import com.example.alphainternproject.presentation.event.BinEvent
 import com.example.alphainternproject.presentation.state.BinState
 import dagger.hilt.android.lifecycle.HiltViewModel
